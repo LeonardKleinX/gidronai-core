@@ -1,0 +1,70 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gidronai"
+version = "0.4.1"
+description = "Synthetic Reality Engine -- physically accurate simulated environments for AI training"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Leonard Klein", email = "leonard@gidronai.me"},
+]
+keywords = ["simulation", "synthetic-data", "physics", "3d", "ai-training", "scene-generation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Typing :: Typed",
+]
+dependencies = [
+    "numpy>=1.24,<2.0",
+    "pyyaml>=6.0",
+    "scipy>=1.11",
+    "pillow>=10.0",
+    "tqdm>=4.65",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "ruff>=0.1.0",
+    "mypy>=1.5",
+    "pre-commit>=3.4",
+]
+gpu = [
+    "cupy-cuda12x>=12.2",
+]
+
+[project.urls]
+Homepage = "https://gidronai.me"
+Documentation = "https://docs.gidronai.me"
+Repository = "https://github.com/LeonardKleinX/gidronai-core"
+Issues = "https://github.com/LeonardKleinX/gidronai-core/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/gidronai"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "ANN"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=gidronai --cov-report=term-missing"
